@@ -1,0 +1,422 @@
+Message-ID: <1458208229.709.1750078245771@56f7ee2630e6>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_708_476066852.1750078245771"
+
+------=_Part_708_476066852.1750078245771
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Playwright Test Automation Technical Test (5 Scenarios)</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Playwright Test Automation Technical Test (5 Scenarios)</h1>
+    <div class=3D"Section1">
+        <h2 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-Candida=
+teTestAutomationOverview"><strong>Candidate Test Automation Overview</stron=
+g></h2>
+<p>You will be asked to demonstrate your automation skills by implementing =
+a set of test scenarios on the DemoQA Books web page (<a class=3D"external-=
+link" data-card-appearance=3D"inline" href=3D"https://demoqa.com/books" rel=
+=3D"nofollow">https://demoqa.com/books</a> ). The assessment covers both UI=
+ and API testing to evaluate your ability to interact with web elements, na=
+vigate pages, handle dynamic content, and validate backend APIs.</p>
+<p><strong>What to Expect:</strong></p>
+<ul>
+<li>
+<p><strong>UI Tests:</strong><br>
+You will automate common user interactions such as searching for books, nav=
+igating to detailed pages, and using pagination controls. These tasks will =
+assess your proficiency with selectors, assertions, and handling page navig=
+ation or dynamic updates.</p></li>
+<li>
+<p><strong>API Tests:</strong><br>
+You will validate the backend APIs related to the book data by sending GET =
+and POST requests. This will test your skills in API automation, including =
+request crafting, response validation, and understanding JSON payloads.</p>=
+</li>
+</ul>
+<p>This exercise is designed to gauge your practical experience with Playwr=
+ight, your approach to test design, and your ability to validate both front=
+end and backend functionality effectively.</p>
+<hr>
+<h2 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-Details:">Detai=
+ls:</h2>
+<p><strong>Target Website:</strong> <a class=3D"external-link" data-card-ap=
+pearance=3D"inline" href=3D"https://demoqa.com/books" rel=3D"nofollow">http=
+s://demoqa.com/books</a></p>
+<p><strong>Tools/Language:</strong> Playwright/Typescript</p>
+<hr>
+<h2 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-UITestScenarios=
+(3)">UI Test Scenarios (3)</h2>
+<h3 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-Scenario1:Searc=
+hforaBookandValidateResults">Scenario 1: Search for a Book and Validate Res=
+ults</h3>
+<p><strong>Goal:</strong> Automate searching for a specific book title and =
+verify that the results contain the expected book.<br><strong>Steps:</stron=
+g></p>
+<ul>
+<li>
+<p>Navigate to the books page</p></li>
+<li>
+<p>Enter a book title (e.g., "Git Pocket Guide") in the search input field<=
+/p></li>
+<li>
+<p>Assert that the result list shows at least one book and contains the sea=
+rched title</p></li>
+<li>
+<p>Assert that irrelevant books do not appear in results</p></li>
+</ul>
+<p><em>Skills demonstrated:</em></p>
+<ul>
+<li>
+<p>Element locating (input, table rows)</p></li>
+<li>
+<p>Handling dynamic UI content (search filter)</p></li>
+<li>
+<p>Assertions and result validation</p></li>
+</ul>
+<hr>
+<h3 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-Scenario2:Navig=
+atetoBookDetailsandVerifyContent">Scenario 2: Navigate to Book Details and =
+Verify Content</h3>
+<p><strong>Goal:</strong> Automate clicking a book from the list and verify=
+ that detailed information is displayed correctly.<br><strong>Steps:</stron=
+g></p>
+<ul>
+<li>
+<p>Navigate to the books page</p></li>
+<li>
+<p>Click on a book title link (e.g., "Learning JavaScript Design Patterns")=
+</p></li>
+<li>
+<p>Assert the URL changes to book details page</p></li>
+<li>
+<p>Assert the book details (author, publisher, ISBN) are present and correc=
+t on the details page</p></li>
+</ul>
+<p><em>Skills demonstrated:</em></p>
+<ul>
+<li>
+<p>Handling navigation and page transitions</p></li>
+<li>
+<p>Verifying multiple elements on a details page</p></li>
+<li>
+<p>URL and content validation</p></li>
+</ul>
+<hr>
+<h3 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-Scenario3:Valid=
+atePaginationFunctionality">Scenario 3: Validate Pagination Functionality</=
+h3>
+<p><strong>Goal:</strong> Automate interaction with pagination controls and=
+ verify that page changes update the book list accordingly.<br><strong>Step=
+s:</strong></p>
+<ul>
+<li>
+<p>Navigate to the books page</p></li>
+<li>
+<p>Identify the pagination controls (next page button or page numbers)</p><=
+/li>
+<li>
+<p>Click to go to the next page</p></li>
+<li>
+<p>Assert the book list updates with different book titles (not same as pre=
+vious page)</p></li>
+<li>
+<p>Optionally, navigate back to the first page and verify the original list=
+ is restored</p></li>
+</ul>
+<p><em>Skills demonstrated:</em></p>
+<ul>
+<li>
+<p>Pagination handling</p></li>
+<li>
+<p>Dynamic content verification</p></li>
+<li>
+<p>Comparing content across states</p></li>
+</ul>
+<hr>
+<h2 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-APITestScenario=
+s(2)">API Test Scenarios (2)</h2>
+<p><em>(Note: The </em><a class=3D"external-link" data-card-appearance=3D"i=
+nline" href=3D"http://demoqa.com" rel=3D"nofollow">http://demoqa.com</a> <e=
+m> site itself doesn=E2=80=99t officially expose documented APIs for books,=
+ but candidates can be asked to automate API calls based on observed networ=
+k requests, or simulate API tests with mock endpoints.)</em></p>
+<h3 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-Scenario4:Verif=
+yBookListAPIResponseStatusandSchema">Scenario 4: Verify Book List API Respo=
+nse Status and Schema</h3>
+<p><strong>Goal:</strong> Automate a GET request to the books API endpoint =
+and validate the response.<br><strong>Steps:</strong></p>
+<ul>
+<li>
+<p>Use Playwright=E2=80=99s APIRequestContext to send a GET request to the =
+API endpoint that returns the list of books (e.g., <code>https://demoqa.com=
+/BookStore/v1/Books</code>)</p></li>
+<li>
+<p>Assert response status is 200 OK</p></li>
+<li>
+<p>Assert response JSON includes a non-empty array of books</p></li>
+<li>
+<p>Validate presence of required fields (title, author, isbn, etc.) in each=
+ book object</p></li>
+</ul>
+<p><em>Skills demonstrated:</em></p>
+<ul>
+<li>
+<p>API request handling in Playwright</p></li>
+<li>
+<p>Status code and response body validation</p></li>
+<li>
+<p>JSON schema or key presence checks</p></li>
+</ul>
+<hr>
+<h3 id=3D"PlaywrightTestAutomationTechnicalTest(5Scenarios)-Scenario5:AddaB=
+ooktoUser=E2=80=99sCollectionviaAPIandVerify">Scenario 5: Add a Book to Use=
+r=E2=80=99s Collection via API and Verify</h3>
+<p><strong>Goal:</strong> Automate POST request to add a book to a user=E2=
+=80=99s collection and verify success response.<br><strong>Steps:</strong><=
+/p>
+<ul>
+<li>
+<p>Authenticate or use a test user token if required</p></li>
+<li>
+<p>Use Playwright APIRequestContext to send a POST request to the add-book =
+endpoint (e.g., <code>https://demoqa.com/BookStore/v1/Books</code>) with a =
+payload including a book=E2=80=99s ISBN and user ID/token</p></li>
+<li>
+<p>Assert the response status is 201 Created or 200 OK</p></li>
+<li>
+<p>Assert the response body confirms the book was added successfully</p></l=
+i>
+</ul>
+<p><em>Skills demonstrated:</em></p>
+<ul>
+<li>
+<p>API POST request with JSON payload</p></li>
+<li>
+<p>Authentication handling (if needed)</p></li>
+<li>
+<p>Response validation for side-effect actions</p></li>
+</ul>
+    </div>
+</body>
+</html>
+------=_Part_708_476066852.1750078245771--
