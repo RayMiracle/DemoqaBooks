@@ -4,6 +4,13 @@ import { BooksPage } from '../pages/BooksPage';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://demoqa.com/books');
+  // await page.route('**/google_ads_iframe_*', route => route.abort());
+  // await page.route('**/pagead/*', route => route.abort());
+  // await page.route('**/googlesyndication.com/*', route => route.abort());
+  // await page.route('**/doubleclick.net/*', route => route.abort());
+  // await page.route('**/securepubads.g.doubleclick.net/*', route => route.abort());
+  // await page.route('**/tpc.googlesyndication.com/*', route => route.abort());
+  // await page.route('**/safeframe.googlesyndication.com/*', route => route.abort());
 });
 
 /*
@@ -42,7 +49,7 @@ Steps:
 4. Assert the book details (author, publisher, ISBN) are present and correct on the details page
 */
 
-test('Navigate to Book Details and Verify Content', async ({ page }) => {
+test.only('Navigate to Book Details and Verify Content', async ({ page }) => {
   // Create page object and click the book link
   const tappedTitle = 'Learning JavaScript Design Patterns';
   const booksPage = new BooksPage(page);
