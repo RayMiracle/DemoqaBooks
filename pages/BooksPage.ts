@@ -3,8 +3,6 @@ import { Page, Locator } from '@playwright/test';
 
 // Page Object Model for the Books page
 export class BooksPage {
-    // Locator for all book title links in the grid
-    readonly allBookLinks: Locator;
     // Playwright page instance
     readonly page: Page;
     // Locator for the search input box
@@ -19,12 +17,14 @@ export class BooksPage {
     readonly jumpToPageSpinButton: Locator;
     // Locator for the rows per page dropdown
     readonly rowsPerPageSelect: Locator;
+    // Locator for all book title links in the grid
+    readonly allBookLinks: Locator;
 
     // Initialize all static locators in the constructor
     constructor(page: Page) {
         this.page = page;
         this.searchBox = page.getByRole('textbox', { name: 'Type to search' });
-        this.searchButton = page.locator('#basic-addon2 span');
+        this.searchButton = page.locator('#basic-addon2');
         this.nextPageButton = page.getByRole('button', { name: 'Next' });
         this.previousPageButton = page.getByRole('button', { name: 'Previous' });
         this.jumpToPageSpinButton = page.getByRole('spinbutton', { name: 'jump to page' });
