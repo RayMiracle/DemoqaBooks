@@ -53,22 +53,56 @@ export class BooksPage {
         await this.rowsPerPageSelect.selectOption(rows);
     }
 
-    // Attempt to close advertisement overlay if present
+    // Attempt to close any advertisement overlay if present (searches all iframes and common close buttons)
     async closeAdOverlayIfPresent() {
-        // Locate the outer advertisement iframe on the page
-        const adFrame = this.page.locator('[id="google_ads_iframe_/21849154601,22343295815/Ad.Plus-300x250_0"]').contentFrame();
-        if (adFrame) {
-            // Locate the inner iframe that contains the actual ad content
-            const innerAdFrame = adFrame.locator('iframe[name="ad_iframe"]').contentFrame();
-            if (innerAdFrame) {
-                // Find the close button inside the inner ad iframe
-                let closeAdButton = innerAdFrame.getByRole('button', { name: 'Close ad' });
-                if (!(await closeAdButton.isVisible())) {
-                    closeAdButton = innerAdFrame.getByRole('button', { name: 'Close' });
+        /*
+         Attempts to close any advertisement overlay that may be present on the page.
+         This function works by searching through all iframes for common close button selectors.
+         If a visible close button is found, it will be clicked to dismiss the overlay.
+         The search stops after the first successful close.
+        */
+
+        // Helper function: tries to click a close button in a given frame
+        const tryCloseInFrame = async (frame: import('@playwright/test').Frame) => {
+            // List of possible selectors for close buttons (role-based and CSS-based)
+            const closeSelectors: Array<
+                { role: 'button', name: string } | { css: string }
+            > = [
+                    // Common ARIA role/button names
+                    { role: 'button', name: 'Close ad' },
+                    { role: 'button', name: 'Close' },
+                    // Common CSS selectors for close buttons
+                    { css: '#ad_position_box button' },
+                    { css: '.close-ad' },
+                    { css: '.close' },
+                    { css: '[aria-label="close"]' },
+                    { css: '[aria-label="Close"]' },
+                ];
+            // Try each selector in order
+            for (const sel of closeSelectors) {
+                let locator: import('@playwright/test').Locator | undefined;
+                // If selector is role-based, use getByRole
+                if ('role' in sel) {
+                    locator = frame.getByRole('button', { name: sel.name });
+                } else if ('css' in sel) {
+                    locator = frame.locator(sel.css);
                 }
-                if (await closeAdButton.isVisible()) {
-                    await closeAdButton.click();
+                // If locator is defined and visible, attempt to click it
+                if (locator && await locator.isVisible().catch(() => false)) {
+                    await locator.click().catch(() => { /* ignore click errors */ });
+                    return true; // Successfully closed overlay
                 }
+            }
+            return false; // No close button found/visible in this frame
+        };
+
+        // Get all frames (including iframes) on the page
+        const frames = this.page.frames();
+        // Iterate through each frame and try to close any ad overlay
+        for (const frame of frames) {
+            if (await tryCloseInFrame(frame)) {
+                // If an overlay was closed, stop searching further
+                break;
             }
         }
     }
