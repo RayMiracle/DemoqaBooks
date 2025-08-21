@@ -61,9 +61,11 @@ export class BooksPage {
             // Locate the inner iframe that contains the actual ad content
             const innerAdFrame = adFrame.locator('iframe[name="ad_iframe"]').contentFrame();
             if (innerAdFrame) {
-                // Find the 'Close ad' button inside the inner ad iframe
-                const closeAdButton = innerAdFrame.getByRole('button', { name: 'Close ad' });
-                // If the button is visible, click it to close the ad overlay
+                // Find the close button inside the inner ad iframe
+                let closeAdButton = innerAdFrame.getByRole('button', { name: 'Close ad' });
+                if (!(await closeAdButton.isVisible())) {
+                    closeAdButton = innerAdFrame.getByRole('button', { name: 'Close' });
+                }
                 if (await closeAdButton.isVisible()) {
                     await closeAdButton.click();
                 }
