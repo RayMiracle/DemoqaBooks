@@ -58,6 +58,13 @@ export class BooksPage {
         // Locate the outer advertisement iframe on the page
         const adFrame = this.page.locator('[id="google_ads_iframe_/21849154601,22343295815/Ad.Plus-300x250_0"]').contentFrame();
         if (adFrame) {
+            // Find the 'Close ad' button inside the outer ad iframe
+            const closeAdButton = adFrame.getByRole('button', { name: 'Close ad' });
+            // If the button is visible, click it to close the ad overlay
+            if (await closeAdButton.isVisible()) {
+                await closeAdButton.click();
+                return; // Exit if ad was closed
+            }
             // Locate the inner iframe that contains the actual ad content
             const innerAdFrame = adFrame.locator('iframe[name="ad_iframe"]').contentFrame();
             if (innerAdFrame) {
