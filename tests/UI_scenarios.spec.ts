@@ -5,12 +5,6 @@ import { BooksPage } from '../pages/BooksPage';
 test.beforeEach(async ({ page }) => {
   await page.goto('https://demoqa.com/books');
   // await page.route('**/google_ads_iframe_*', route => route.abort());
-  // await page.route('**/pagead/*', route => route.abort());
-  // await page.route('**/googlesyndication.com/*', route => route.abort());
-  // await page.route('**/doubleclick.net/*', route => route.abort());
-  // await page.route('**/securepubads.g.doubleclick.net/*', route => route.abort());
-  // await page.route('**/tpc.googlesyndication.com/*', route => route.abort());
-  // await page.route('**/safeframe.googlesyndication.com/*', route => route.abort());
 });
 
 /*
