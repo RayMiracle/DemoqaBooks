@@ -19,7 +19,9 @@
     "resolveJsonModule": true
   },
   "include": [
+    "pages/**/*.ts",
     "tests/**/*.ts",
+    "utils/**/*.ts",
     "playwright.config.ts"
   ],
   "exclude": [
