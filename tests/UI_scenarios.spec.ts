@@ -1,35 +1,24 @@
-/**
- * UI test scenarios for the DemoQA Books page using Playwright.
- * @file UI_scenarios.spec.ts
- */
+// Import Playwright test functions and the BooksPage page object
 import { test, expect } from '@playwright/test';
 import { BooksPage } from '../pages/BooksPage';
 
-/**
- * Runs before each test to navigate to the books page and verify URL.
- * @param page Playwright Page object
- */
 test.beforeEach(async ({ page }) => {
   await page.goto('https://demoqa.com/books');
   await expect(page).toHaveURL('https://demoqa.com/books');
   // await page.route('**/google_ads_iframe_*', route => route.abort());
 });
 
-/**
- * Scenario 1: Search for a Book and Validate Results
- * Automates searching for a specific book title and verifies that the results contain the expected book.
- * Steps:
- * 1. Navigate to the books page
- * 2. Enter a book title ("Git Pocket Guide") in the search input field
- * 3. Click the search button
- * 4. Assert that the result list shows at least one book and contains the searched title
- * 5. Assert that irrelevant books do not appear in results
- */
+/*
+Scenario 1: Search for a Book and Validate Results
+Automate searching for a specific book title and verify that the results contain the expected book.
+Steps:
+1. Navigate to the books page
+2. Enter a book title ("Git Pocket Guide") in the search input field
+3. Click the search button
+4. Assert that the result list shows at least one book and contains the searched title
+5. Assert that irrelevant books do not appear in results
+*/
 
-/**
- * Test: Search for a Book and Validate Results
- * @param page Playwright Page object
- */
 test('Search for a Book and Validate Results', async ({ page }) => {
   // Create page object for books page
   const searchedTitle = 'Git Pocket Guide';
@@ -43,22 +32,23 @@ test('Search for a Book and Validate Results', async ({ page }) => {
   await expect(bookLink).toBeVisible();
   // Assert irrelevant book is not present
   expect(await booksPage.getBookLinkNoWait('Some Other Book').count()).toBe(0);
+  // Assert only the searched book is displayed
+  const visibleTitles = await booksPage.getVisibleBookTitles();
+  for (const title of visibleTitles) {
+    expect(title).toBe(searchedTitle);
+  }
 });
 
-/**
- * Scenario 2: Navigate to Book Details and Verify Content
- * Automates clicking a book from the list and verifies that detailed information is displayed correctly.
- * Steps:
- * 1. Navigate to the books page
- * 2. Click on a book title link ("Learning JavaScript Design Patterns")
- * 3. Assert the URL changes to book details page
- * 4. Assert the book details (author, publisher, ISBN) are present and correct on the details page
- */
+/*
+Scenario 2: Navigate to Book Details and Verify Content
+Automate clicking a book from the list and verify that detailed information is displayed correctly.
+Steps:
+1. Navigate to the books page
+2. Click on a book title link ("Learning JavaScript Design Patterns")
+3. Assert the URL changes to book details page
+4. Assert the book details (author, publisher, ISBN) are present and correct on the details page
+*/
 
-/**
- * Test: Navigate to Book Details and Verify Content
- * @param page Playwright Page object
- */
 test('Navigate to Book Details and Verify Content', async ({ page }) => {
   // Create page object and click the book link
   const tappedTitle = 'Learning JavaScript Design Patterns';
@@ -79,24 +69,30 @@ test('Navigate to Book Details and Verify Content', async ({ page }) => {
   // await expect(booksPage.isbnLocator).toBeVisible();
 });
 
-/**
- * Scenario 3: Validate Pagination Functionality
- * Automates interaction with pagination controls and verifies that page changes update the book list accordingly.
- * Steps:
- * 1. Navigate to the books page
- * 2. Identify the pagination controls (next page button)
- * 3. Click to go to the next page
- * 4. Assert the book list updates with different book titles (not same as previous page)
- * 5. Navigate back to the first page and verify the original list is restored
- */
+/*
+Scenario 3: Validate Pagination Functionality
+Automate interaction with pagination controls and verify that page changes update the book list accordingly.
+Steps:
+1. Navigate to the books page
+2. Identify the pagination controls (next page button)
+3. Click to go to the next page
+4. Assert the book list updates with different book titles (not same as previous page)
+5. Navigate back to the first page and verify the original list is restored
+*/
 
+/**
+ * Expected book titles for page 1 of the pagination test.
+ * @type {string[]}
+ * Note: Uses 'assert { type: "json" }' to import JSON as a module (ESM feature).
+ */
 import expectedPage1Titles from './fixtures/expectedPage1Titles.json' assert { type: "json" };
+/**
+ * Expected book titles for page 2 of the pagination test.
+ * @type {string[]}
+ * Note: Uses 'assert { type: "json" }' to import JSON as a module (ESM feature).
+ */
 import expectedPage2Titles from './fixtures/expectedPage2Titles.json' assert { type: "json" };
 
-/**
- * Test: Validate Pagination Functionality
- * @param page Playwright Page object
- */
 test('Validate Pagination Functionality', async ({ page }) => {
   // Create page object and interact with pagination controls
   const booksPage = new BooksPage(page);

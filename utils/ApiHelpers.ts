@@ -23,7 +23,7 @@ export async function registerUser(request: APIRequestContext, username: string,
     // Check for successful registration (HTTP 201)
     if (response.status() !== 201) {
         const errorMessage = body.message || JSON.stringify(body);
-        throw new Error(`User registration failed: ${response.status()} - ${errorMessage}`);
+        throw new Error(`User registration failed: Response status is ${response.status()}, Error message is ${errorMessage}`);
     }
     // Return user ID
     return body.userID;
@@ -47,7 +47,7 @@ export async function generateToken(request: APIRequestContext, username: string
     // Check for successful token generation (HTTP 200)
     if (response.status() !== 200) {
         const errorMessage = body.message || JSON.stringify(body);
-        throw new Error(`Token generation failed: ${response.status()} - ${errorMessage}`);
+        throw new Error(`Token generation failed: Response status is ${response.status()}, Error message is ${errorMessage}`);
     }
     // Return token
     return body.token;
