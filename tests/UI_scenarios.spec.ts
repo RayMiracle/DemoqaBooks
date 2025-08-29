@@ -2,9 +2,13 @@
 import { test, expect } from '@playwright/test';
 import { BooksPage } from '../pages/BooksPage';
 
+let booksPage: BooksPage;
+
 test.beforeEach(async ({ page }) => {
   await page.goto('https://demoqa.com/books');
   await expect(page).toHaveURL('https://demoqa.com/books');
+  // Create page object for books page and assign to shared variable
+  booksPage = new BooksPage(page);
   // await page.route('**/google_ads_iframe_*', route => route.abort());
 });
 
@@ -20,9 +24,7 @@ Steps:
 */
 
 test('Search for a Book and Validate Results', async ({ page }) => {
-  // Create page object for books page
   const searchedTitle = 'Git Pocket Guide';
-  const booksPage = new BooksPage(page);
   // Search for the book
   await booksPage.searchBook(searchedTitle);
   // Assert at least one matching book is visible
@@ -50,9 +52,7 @@ Steps:
 */
 
 test('Navigate to Book Details and Verify Content', async ({ page }) => {
-  // Create page object and click the book link
   const tappedTitle = 'Learning JavaScript Design Patterns';
-  const booksPage = new BooksPage(page);
   await (await booksPage.getBookLink(tappedTitle)).click();
   // Attempt to close advertisement overlay if present using POM method
   await booksPage.closeAdOverlayIfPresent();
@@ -94,8 +94,6 @@ import expectedPage1Titles from './fixtures/expectedPage1Titles.json' assert { t
 import expectedPage2Titles from './fixtures/expectedPage2Titles.json' assert { type: "json" };
 
 test('Validate Pagination Functionality', async ({ page }) => {
-  // Create page object and interact with pagination controls
-  const booksPage = new BooksPage(page);
   // Select 5 rows per page
   await booksPage.selectRowsPerPage('5');
   // Assert we are on page 1
