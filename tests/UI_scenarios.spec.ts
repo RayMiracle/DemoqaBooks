@@ -5,7 +5,7 @@ import { BooksPage } from '../pages/BooksPage';
 let booksPage: BooksPage;
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://demoqa.com/books');
+  await page.goto('/books');
   await expect(page).toHaveURL('https://demoqa.com/books');
   // Create page object for books page and assign to shared variable
   booksPage = new BooksPage(page);

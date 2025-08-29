@@ -3,6 +3,9 @@
  */
 import { APIRequestContext } from '@playwright/test';
 
+// API Endpoints and test data constants
+const REGISTER_USER_URL = 'https://demoqa.com/Account/v1/User';
+const GENERATE_TOKEN_URL = 'https://demoqa.com/Account/v1/GenerateToken';
 const JSON_HEADERS = { 'Content-Type': 'application/json' };
 
 /**
@@ -15,7 +18,7 @@ const JSON_HEADERS = { 'Content-Type': 'application/json' };
  */
 export async function registerUser(request: APIRequestContext, username: string, password: string): Promise<string> {
     // Send POST request to register user
-    const response = await request.post('https://demoqa.com/Account/v1/User', {
+    const response = await request.post(REGISTER_USER_URL, {
         data: { userName: username, password },
         headers: JSON_HEADERS
     });
@@ -39,7 +42,7 @@ export async function registerUser(request: APIRequestContext, username: string,
  */
 export async function generateToken(request: APIRequestContext, username: string, password: string): Promise<string> {
     // Send POST request to generate token
-    const response = await request.post('https://demoqa.com/Account/v1/GenerateToken', {
+    const response = await request.post(GENERATE_TOKEN_URL, {
         data: { userName: username, password },
         headers: JSON_HEADERS
     });

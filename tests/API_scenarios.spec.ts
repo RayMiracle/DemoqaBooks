@@ -5,8 +5,6 @@ import { generateRandomCredentials } from '../utils/TestDataHelpers';
 
 // API Endpoints and test data constants
 const BOOKS_API_URL = 'https://demoqa.com/BookStore/v1/Books';
-const REGISTER_USER_URL = 'https://demoqa.com/Account/v1/User';
-const GENERATE_TOKEN_URL = 'https://demoqa.com/Account/v1/GenerateToken';
 const TEST_ISBN = '9781449331818';
 
 /**
