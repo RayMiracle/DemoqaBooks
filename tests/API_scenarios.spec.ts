@@ -18,15 +18,9 @@ const TEST_ISBN = '9781449331818';
  */
 
 test('Verify Book List API Response Status and Schema', async ({ request }) => {
-    const response = await request.get(BOOKS_API_URL);
-    expect(response.status()).toBe(200);
-
-    const responseBody = await response.json();
-    const books = responseBody.books;
-    expect(Array.isArray(books)).toBe(true);
-    expect(books.length).toBeGreaterThan(0);
-
-    books.forEach((element: {
+    let response: import('@playwright/test').APIResponse;
+    let responseBody: any;
+    let books: Array<{
         isbn: string;
         title: string;
         author: string;
@@ -35,26 +29,50 @@ test('Verify Book List API Response Status and Schema', async ({ request }) => {
         pages: number;
         description: string;
         website: string;
-    }) => {
-        expect(element).toHaveProperty('isbn');
-        expect(typeof element.isbn).toBe('string');
-        expect(element).toHaveProperty('title');
-        expect(typeof element.title).toBe('string');
-        expect(element).toHaveProperty('author');
-        expect(typeof element.author).toBe('string');
-        expect(element).toHaveProperty('publish_date');
-        expect(typeof element.publish_date).toBe('string');
-        // Check that publish_date matches ISO 8601 date-time format
-        const isoDateTimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
-        expect(element.publish_date).toMatch(isoDateTimeRegex);
-        expect(element).toHaveProperty('publisher');
-        expect(typeof element.publisher).toBe('string');
-        expect(element).toHaveProperty('pages');
-        expect(typeof element.pages).toBe('number');
-        expect(element).toHaveProperty('description');
-        expect(typeof element.description).toBe('string');
-        expect(element).toHaveProperty('website');
-        expect(typeof element.website).toBe('string');
+    }>;
+    await test.step('Send a GET request to the API endpoint that returns the list of books', async () => {
+        response = await request.get(BOOKS_API_URL);
+    });
+    await test.step('Assert response status is 200 OK', async () => {
+        expect(response.status()).toBe(200);
+    });
+    await test.step('Assert response JSON includes a non-empty array of books', async () => {
+        responseBody = await response.json();
+        books = responseBody.books;
+        expect(Array.isArray(books)).toBe(true);
+        expect(books.length).toBeGreaterThan(0);
+    });
+    await test.step('Validate presence of required fields (title, author, isbn, etc.) in each book object', async () => {
+        books.forEach((element: {
+            isbn: string;
+            title: string;
+            author: string;
+            publish_date: string;
+            publisher: string;
+            pages: number;
+            description: string;
+            website: string;
+        }) => {
+            expect(element).toHaveProperty('isbn');
+            expect(typeof element.isbn).toBe('string');
+            expect(element).toHaveProperty('title');
+            expect(typeof element.title).toBe('string');
+            expect(element).toHaveProperty('author');
+            expect(typeof element.author).toBe('string');
+            expect(element).toHaveProperty('publish_date');
+            expect(typeof element.publish_date).toBe('string');
+            // Check that publish_date matches ISO 8601 date-time format
+            const isoDateTimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+            expect(element.publish_date).toMatch(isoDateTimeRegex);
+            expect(element).toHaveProperty('publisher');
+            expect(typeof element.publisher).toBe('string');
+            expect(element).toHaveProperty('pages');
+            expect(typeof element.pages).toBe('number');
+            expect(element).toHaveProperty('description');
+            expect(typeof element.description).toBe('string');
+            expect(element).toHaveProperty('website');
+            expect(typeof element.website).toBe('string');
+        });
     });
 });
 
@@ -69,35 +87,45 @@ test('Verify Book List API Response Status and Schema', async ({ request }) => {
  */
 
 test('Register user, generate token, and add a book to user collection', async ({ request }) => {
-    // Generate a random username and password using utility
-    const { username, password } = generateRandomCredentials();
-
-    // Register user using helper function
-    const userId = await registerUser(request, username, password);
-    expect(userId).toBeDefined();
-
-    // Generate token using helper function
-    const token = await generateToken(request, username, password);
-    expect(token).toBeDefined();
-
-    // Add a book to user's collection
-    const payload = {
-        userId,
-        collectionOfIsbns: [{ isbn: TEST_ISBN }]
-    };
-
-    const response = await request.post(BOOKS_API_URL, {
-        data: payload,
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
+    let username: string;
+    let password: string;
+    let userId: string;
+    let token: string;
+    let payload: { userId: string; collectionOfIsbns: Array<{ isbn: string }> };
+    let response: import('@playwright/test').APIResponse;
+    let responseBody: any;
+    let books: Array<{ isbn: string }>;
+    await test.step('Authenticate or use a test user token if required', async () => {
+        // Generate a random username and password using utility
+        ({ username, password } = generateRandomCredentials());
+        // Register user using helper function
+        userId = await registerUser(request, username, password);
+        expect(userId).toBeDefined();
+        // Generate token using helper function
+        token = await generateToken(request, username, password);
+        expect(token).toBeDefined();
     });
-    expect([200, 201]).toContain(response.status());
-
-    const responseBody = await response.json();
-    const books = responseBody.books;
-    expect(Array.isArray(books)).toBe(true);
-    expect(books.length).toBe(1);
-    expect(books[0].isbn).toBe(TEST_ISBN);
+    await test.step('Send a POST request to the API endpoint with a payload including a book\'s ISBN and user ID/token', async () => {
+        payload = {
+            userId,
+            collectionOfIsbns: [{ isbn: TEST_ISBN }]
+        };
+        response = await request.post(BOOKS_API_URL, {
+            data: payload,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+    });
+    await test.step('Assert the response status is 201 Created or 200 OK', async () => {
+        expect([200, 201]).toContain(response.status());
+    });
+    await test.step('Assert the response body confirms the book was added successfully', async () => {
+        responseBody = await response.json();
+        books = responseBody.books;
+        expect(Array.isArray(books)).toBe(true);
+        expect(books.length).toBe(1);
+        expect(books[0].isbn).toBe(TEST_ISBN);
+    });
 });
